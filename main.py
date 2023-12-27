@@ -3,6 +3,7 @@ from tkinter import *
 import time
 import random
 
+
 class pet():
     def __init__(self):
         # create a window
@@ -25,7 +26,7 @@ class pet():
         self.window.overrideredirect(True)
 
         # make window draw over all others
-        self.window.attributes('-topmost', True)
+        # self.window.wm_attributes('-topmost', 1)
 
         # turn black into transparency
         self.window.wm_attributes('-transparentcolor', 'green')
@@ -55,6 +56,7 @@ class pet():
         self.window.bind("<ButtonRelease-1>", self.OnRelease)
         self.window.bind("<Motion>", self.OnMouseMove)
         self.window.bind("<Double-Button-1>", self.OnDoubleClick)
+        self.window.bind("<Escape>", self.on_esc_pressed)
         
         self.label.config(cursor="hand2")
 
@@ -67,7 +69,11 @@ class pet():
         # run self.update() after 0ms when mainloop starts
         self.window.after(0, self.update)
         self.window.mainloop()
-    
+
+    def on_esc_pressed(self, event):
+        if self.is_dragging:
+            self.window.destroy()
+
     def OnClick(self, event):
         print("press")
         self.behavior = 4
@@ -101,6 +107,7 @@ class pet():
             self.window.geometry('+{x}+{y}'.format(x=self.x, y=self.y))
             
     def bounce(self):
+        self.window.wm_attributes('-topmost', 1)
         if self.x + 64 > self.window.winfo_screenwidth() and self.behavior == 0:
             print("bounce1")
             self.behavior = 1
@@ -115,6 +122,7 @@ class pet():
         self.behaviorcounter = random.randrange(150,200,5)
 
     def update(self):
+        
         self.bounce()
         # move and switch directions on screen edge    
         # 0 -> walk right
@@ -122,7 +130,6 @@ class pet():
         # 2 -> sit
         # 4 -> mouse drag
         # 5 -> double click
-        
         if self.behavior == 0:
             self.x +=3
             self.img = self.walking_right[self.frame_index]
