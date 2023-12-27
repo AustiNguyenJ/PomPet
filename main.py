@@ -8,9 +8,9 @@ class pet():
         # create a window
         self.window = tk.Tk()
         # placeholder image
-        self.walking_right = [tk.PhotoImage(file='pomright.gif', format='gif -index %i' % (i)) for i in range(4)]
-        self.walking_left = [tk.PhotoImage(file='pomleft.gif', format='gif -index %i' % (i)) for i in range(4)]
-        self.pomsit= [tk.PhotoImage(file='pomsit.gif', format='gif -index %i' % (i)) for i in range(4)]
+        self.walking_right = [tk.PhotoImage(file='assets/pomright.gif', format='gif -index %i' % (i)) for i in range(4)]
+        self.walking_left = [tk.PhotoImage(file='assets/pomleft.gif', format='gif -index %i' % (i)) for i in range(4)]
+        self.pomsit= [tk.PhotoImage(file='assets/pomsit.gif', format='gif -index %i' % (i)) for i in range(4)]
 
         self.frame_index = 0
         self.img = self.walking_right[self.frame_index]
